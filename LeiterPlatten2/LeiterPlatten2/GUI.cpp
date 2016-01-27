@@ -9,12 +9,18 @@ GUI::GUI(PreisMap& pm) : m_rPreisMap(pm) {
 
 int GUI::showMenu()
 {
+		//--------test area start-----------------
+
+		//Node* choice = inputNode("Please select a Node:");
+
+		//--------test area end-------------------
+
 		cout << endl;
 		cout << "------------------------------------------------------------------------" << endl;
 		cout << "Bitte waehlen Sie:" << endl
-		<< "1 - Neuer Auftrag" << endl
-		<< "2 - Ausgabe aller Umsaetze" << endl
-		<< "3 - Beenden" << endl;
+		<< "1. Neuer Auftrag" << endl
+		<< "2. Ausgabe aller Umsaetze" << endl
+		<< "3. Beenden" << endl;
 
 	cout << "Eingabe: ";
 	int eingabe;
@@ -26,7 +32,7 @@ bool GUI::angebotBerechnung(Node& rStart, Node& rEnde)
 {
 	int preisstufe = 0;
 	
-	PreisMap *currentPreisMap;
+	//PreisMap *currentPreisMap;
 	int anzahl = 0;
 	string word;
 	deque<Edge*> result;
@@ -92,7 +98,7 @@ int GUI::inputNumber(string question)
 
 			cin.clear(); 
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-			cout << "Fehlerhafte Eingabe!" << endl;
+			cout << "\nFehlerhafte Eingabe! Nur Zahlen sind zulaessing...\n" << endl;
 
 		}else{
 			fail = false;
@@ -123,4 +129,40 @@ string GUI::inputString(string question)
 		}
 	}
 	return input;
+}
+
+Node* GUI::inputNode(string question)
+{
+	Node* pNode = NULL;
+	unsigned input, i;
+	stringstream ss;
+
+	bool finished = false;
+
+	list<Node*> nodeList = m_rPreisMap.getNodes();	
+
+	i = 0;
+	ss << question << "\n\n";
+	for (auto node : nodeList) {
+
+		ss << ++i << ". " << node->getID() << endl;
+	}
+
+	while (!finished) {
+
+		input = inputNumber(ss.str());
+
+		if ((input > nodeList.size())||(input<1)) {
+
+			cout << "\nAuswahl ungueltig, bitte versuchen Sie es erneut... \n" << endl;
+		}
+		else {
+
+			finished = true;
+			pNode = *(next(nodeList.begin(), input - 1));
+			cout << "\nIhre Auswahl : " << pNode->getID() << endl << endl;
+		}
+	}
+
+	return pNode;
 }

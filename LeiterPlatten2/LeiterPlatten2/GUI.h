@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #include "PreisAngebot.h"
 #include "PreisMap.h"
@@ -43,8 +44,10 @@ private:
 	int inputNumber(string question);
 	string inputString(string question);
 	map<Node*, double> m_revInfos;
-
+	Node* inputNode(string question);
 };
+
+
 
 
 /*

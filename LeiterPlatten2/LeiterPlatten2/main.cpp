@@ -9,6 +9,7 @@ using namespace std;
 
 int main()
 {
+	
 
 	PreisMap preisMap1, preisMap100, preisMap1000;
 
@@ -18,6 +19,8 @@ int main()
 	Node& rLPBes = preisMap1.addNode(new Node("LPBes"));
 	Node& rBP = preisMap1.addNode(new Node("BP"));
 	Node& rHWTesting = preisMap1.addNode(new Node("HWTesting"));
+
+	
 
 	//preisMap100.addNode(&rSysEng);
 	//preisMap100.addNode(&rEndos);
