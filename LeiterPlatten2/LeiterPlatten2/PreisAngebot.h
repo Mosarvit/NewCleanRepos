@@ -30,7 +30,7 @@ public:
 
 private:
 
-	vector<double>  m_angebote;
+	vector<double> m_angebote;
 };
 
 

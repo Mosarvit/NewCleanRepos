@@ -153,6 +153,8 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PreisAngebot.cpp" />
     <ClCompile Include="PreisMap.cpp" />
+    <ClCompile Include="TwoSideEdge.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Edge.h" />
@@ -161,6 +163,8 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="PreisAngebot.h" />
     <ClInclude Include="PreisMap.h" />
+    <ClInclude Include="TwoSideEdge.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

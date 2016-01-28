@@ -2,6 +2,7 @@
 #define EDGE_H
 
 #include "Node.h"
+#include "Utilities.h"
 
 using namespace std;
 
