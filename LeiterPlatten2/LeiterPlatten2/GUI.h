@@ -20,7 +20,7 @@ public:
 
 	GUI(PreisMap& pm)  ;
 
-    int showMenu();
+    int startMenu();
 
     // Nutzerinteraktion zum Buchen eines Fluges
     // Rückgabewert: 'true', wenn die vom Nutzer gewählte Route gebucht werden soll, sonst 'false'
@@ -42,6 +42,7 @@ private:
 
     //list<Booking> m_bookings;
 	int inputNumber(string question);
+	int inputLimitedNumber(string question, int min, int max);
 	string inputString(string question);
 	map<Node*, double> m_revInfos;
 	Node* inputNode(string question);

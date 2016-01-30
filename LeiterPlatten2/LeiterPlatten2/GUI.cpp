@@ -7,24 +7,21 @@ GUI::GUI(PreisMap& pm) : m_rPreisMap(pm) {
 	}
 }
 
-int GUI::showMenu()
+int GUI::startMenu()
 {
 		//--------test area start-----------------
 
 		//Node* choice = inputNode("Please select a Node:");
 
 		//--------test area end-------------------
+	
+	string question =	"------------------------------------------------------------------------\n"
+						"Bitte waehlen Sie:\n"
+						"1. Neuer Auftrag\n"
+						"2. Ausgabe aller Umsaetze\n"
+						"3. Beenden\n";
 
-		cout << endl;
-		cout << "------------------------------------------------------------------------" << endl;
-		cout << "Bitte waehlen Sie:" << endl
-		<< "1. Neuer Auftrag" << endl
-		<< "2. Ausgabe aller Umsaetze" << endl
-		<< "3. Beenden" << endl;
-
-	cout << "Eingabe: ";
-	int eingabe;
-	cin >> eingabe;
+	int eingabe = inputLimitedNumber(question, 1, 3);
 	return eingabe;
 }
 
@@ -101,6 +98,37 @@ int GUI::inputNumber(string question)
 			cout << "\nFehlerhafte Eingabe! Nur Zahlen sind zulaessing...\n" << endl;
 
 		}else{
+			fail = false;
+		}
+	}
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	return n;
+}
+
+int GUI::inputLimitedNumber(string question, int min, int max)
+{
+	int n;
+	bool fail = true;
+
+	while (fail)
+	{
+		cout << question << endl;
+		cout << "Eingabe: ";
+		cin >> n;
+
+		if (!cin) {
+
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "\nFehlerhafte Eingabe! Nur Zahlen sind zulaessing...\n" << endl;
+
+		}
+		else if((n<min)||(n>max)) {
+		
+			cout << "\nFehlerhafte Eingabe! Nur zahlen zwischen " << min << " und " << max << " sind zulaessig\n" << endl;
+		}
+		
+		{
 			fail = false;
 		}
 	}

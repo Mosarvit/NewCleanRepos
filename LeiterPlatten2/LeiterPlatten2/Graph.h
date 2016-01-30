@@ -41,6 +41,7 @@ public:
 	void saveAsDot(const std::string& rFilename);
 
 	bool findShortestPathDijkstra(tPath& rPath, Node* pSrcNode, Node* pDstNode, int preisstufe);
+	bool findShortestPathDijkstra(std::deque<Edge*>& rPath, Node* pSrcNode, Node* pDstNode);
 
 
 protected:

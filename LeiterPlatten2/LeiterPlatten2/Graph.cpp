@@ -198,3 +198,75 @@ bool Graph::findShortestPathDijkstra(std::deque<Edge*>& rPath, Node* pSrcNode, N
 
 
 //---------------------------------------------------------------------------------------------------------------------
+bool Graph::findShortestPathDijkstra(std::deque<Edge*>& rPath, Node* pSrcNode, Node* pDstNode)
+{
+	tNodeList Q;				// Liste der noch zu betrachtenden Knoten
+	tDijkstraMap nodeEntry;		// Datenstruktur für prevNode, prevEdge, dist (für jeden Node)
+
+								//Initialisierung
+	for (tNodeList::iterator it = m_nodes.begin(); it != m_nodes.end(); it++)
+	{
+		Node* pCurrNode = *it;
+		Q.push_back(pCurrNode);
+
+		tDijkstraEntry entry;
+		entry.dist = 10000000;
+		entry.prevNode = NULL;
+		entry.prevEdge = NULL;
+
+		nodeEntry[pCurrNode] = entry;
+	}
+
+	nodeEntry[pSrcNode].dist = 0;
+
+	// Start des Algorithmus
+	while (!Q.empty())
+	{
+		// Finde Node mit der kleinsten gespeicherten Distanz
+		Node* pCurrentNode = Q.front();
+		for (tNodeList::iterator it = Q.begin(); it != Q.end(); it++)
+		{
+			if (nodeEntry[pCurrentNode].dist > nodeEntry[*it].dist)
+			{
+				pCurrentNode = *it;
+			}
+		}
+		tDijkstraEntry& rCurrNodeEntry = nodeEntry[pCurrentNode];
+		// Aktuellen Knoten aus der Liste der zu betrachtenden Knoten entfernen
+		Q.remove(pCurrentNode);
+
+		// Falls der aktuelle Knoten mit der kleinsten Distanz der Zielknoten ist -> abbrechen (fertig)
+		if (pCurrentNode == pDstNode)
+		{
+			break;
+		}
+
+		std::list<Edge*>& rOutEdges = pCurrentNode->getOutgoingEdges();
+
+		// Alle ausgehenden Kanten des aktuellen Knotens durchsuchen
+		for (std::list<Edge*>::iterator it = rOutEdges.begin(); it != rOutEdges.end(); it++)
+		{
+			Node* pNeighbour = &((*it)->getDstNode());
+			tDijkstraEntry& rNeighbourEntry = nodeEntry[pNeighbour];
+
+			double newDistance = rCurrNodeEntry.dist + (*it)->getWeight();
+			if (newDistance < rNeighbourEntry.dist)
+			{
+				rNeighbourEntry.dist = newDistance;
+				rNeighbourEntry.prevNode = pCurrentNode;
+				rNeighbourEntry.prevEdge = *it;
+			}
+		}
+	}
+
+	// Den Weg in 'rPath' speichern.
+	for (Node* n = pDstNode; n != NULL; n = nodeEntry[n].prevNode)
+	{
+		if (nodeEntry[n].prevEdge != NULL)
+		{
+			rPath.push_front(nodeEntry[n].prevEdge);
+		}
+	}
+
+	return !rPath.empty();
+}
