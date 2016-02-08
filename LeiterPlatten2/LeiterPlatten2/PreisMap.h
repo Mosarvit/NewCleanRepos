@@ -17,7 +17,7 @@ public:
     //void addBusRoute(Node& rCity1, Node& rCity2, double dist);
 
     // Nodes anhand ihrer ID abfragen. (wird für die Nutzereingabe benötigt)
-    Node* getNodeById(const std::string& rNodeId);
+    Node* getNodeById(const string& rNodeId);
 
 	
 
