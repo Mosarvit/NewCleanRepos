@@ -13,7 +13,7 @@ class PreisAngebot : public Edge
 public:
 
 	PreisAngebot(Node& rSrc, Node& rDst, double angebot1, double angebot100, double angebot1000) ;
-
+	PreisAngebot(Node& rSrc, Node& rDst, double angebot1);
     // Kantengewicht = Preis (18ct / km)
 
 	 virtual double getWeight(int preisStufe) { return *(next(m_angebote.begin(), preisStufe)); }

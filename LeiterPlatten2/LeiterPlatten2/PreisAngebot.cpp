@@ -14,3 +14,8 @@ PreisAngebot::PreisAngebot(Node& rSrc, Node& rDst, double angebot1, double angeb
 	m_angebote.push_back(angebot100);
 	m_angebote.push_back(angebot1000);
 };
+
+PreisAngebot::PreisAngebot(Node& rSrc, Node& rDst, double angebot1) : Edge(rSrc, rDst) {
+
+	m_angebote.push_back(angebot1);
+};
